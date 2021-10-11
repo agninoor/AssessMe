@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navbar</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
+    <script>
+		var decodedJson = decodeURIComponent("{{{encodedJson}}}");
+		var info = JSON.parse(decodedJson);
+
+		function getQuestionsFromDB(info) {
+			const creator = info.creator;
+			
+			fetch(`/getuserquizzes/${creator}`)
+				.then((response) => response.json())
+				.then((data) => {
+					console.log(data);
+                    makeUserLink(data);
+					
+				})
+				.catch((err) => console.log(err));
+		}
+
+		getQuestionsFromDB(info);
+        function makeUserLink(data){
+
+        const links = document.getElementById("links");
+        for(i=0;i<data.length;i++){
+            links.innerHTML+= `<h1 class="quizname">${data[i].quizname}</h1>`
+        }
+        }
+        
+	</script>
+
+    <!-- styles -->
+    <link rel="stylesheet" href="css/navbar.css" />
+</head>
+
+<body>
+    
+    <nav>
+        <div class="nav-center">
+            <!-- nav header -->
+            <div class="nav-header">
+                <h2>AssessMe</h2>
+                </button>
+            </div>
+            <!-- links -->
+            <ul class="links">
+                <li class="username">
+                    {{userName}}
+                </li>
+
+            
+                <li>
+                    <a href="quizname">Make Quiz</a>
+                </li>
+                <li>
+                    <a href="templateview">Search Quiz</a>
+                </li>
+                <li>
+                <a href="manual">Manual</a>
+                </li>
+                
+                
+               
+                
+
+            </ul>
+
+
+
+    </nav>
+    <div id="links">
+
+    </div>
+    
+    <!-- javascript -->
+    
+</body>
+
+</html>
